@@ -20,9 +20,20 @@ pipeline {
     }
 
     stage('Deploy') {
-      steps {
-        input(message: 'Do you want to deploy', id: 'yes', ok: 'Continue')
-        writeFile(file: 'logfile.txt', text: 'This contains all the logs')
+      parallel {
+        stage('Deploy') {
+          steps {
+            input(message: 'Do you want to deploy', id: 'yes', ok: 'Continue')
+            writeFile(file: 'logfile.txt', text: 'This contains all the logs')
+          }
+        }
+
+        stage('logfile') {
+          steps {
+            archiveArtifacts 'logfile.txt'
+          }
+        }
+
       }
     }
 
