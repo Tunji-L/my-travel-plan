@@ -21,7 +21,7 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        input(message: 'Do you want to deploy', id: 'yes', ok: 'no')
+        input(message: 'Do you want to deploy', id: 'yes', ok: 'Continue')
       }
     }
 
